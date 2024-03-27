@@ -5,9 +5,11 @@ import Logo from "../../../components/display/Logo";
 import Form from "../../../components/form/Form";
 import { LoginSchema } from "../schema";
 import { FormSubmitButton, FormTextInput } from "../../../components/input";
+import LinkedText from "../widgets/LinkedText";
+import { AuthRoutNames } from "../navigation";
 
-const LoginScreen = () => {
-  const [loading, setLoading] = useState(false)
+const LoginScreen = ({ navigation }: any) => {
+  const [loading, setLoading] = useState(false);
   const handleLogin = async (
     values: any,
     { setFieldError }: { setFieldError: any }
@@ -56,6 +58,11 @@ const LoginScreen = () => {
             <View style={{ marginTop: 20 }}>
               <FormSubmitButton title="Login" />
             </View>
+            <LinkedText
+              unlinked="Dont have an account? "
+              linkedText="Sign up"
+              onPress={() => navigation.navigate(AuthRoutNames.REGISTER_SCREEN)}
+            />
           </Form>
         </View>
         <View style={{ flex: 1 }} />

@@ -3,8 +3,13 @@ import React from "react";
 import Logo from "../../../components/display/Logo";
 import SafeArea from "../../../components/layout/SafeArea";
 import { Button } from "react-native-paper";
+import { AuthRoutNames } from "../navigation";
 
-const WelcomeScreen = () => {
+interface Props {
+  navigation: any;
+}
+
+const WelcomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeArea>
       <View style={styles.container}>
@@ -12,7 +17,12 @@ const WelcomeScreen = () => {
         <Logo size={200} />
         <View style={{ flex: 1 }} />
         <View style={{ width: "100%", padding: 10 }}>
-          <Button mode="contained">Get Started</Button>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate(AuthRoutNames.LOGIN_SCREEN)}
+          >
+            Get Started
+          </Button>
         </View>
         <View style={{ flex: 1 }} />
       </View>

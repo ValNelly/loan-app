@@ -5,8 +5,10 @@ import Logo from "../../../components/display/Logo";
 import Form from "../../../components/form/Form";
 import { LoginSchema, RegisterSchema } from "../schema";
 import { FormSubmitButton, FormTextInput } from "../../../components/input";
+import LinkedText from "../widgets/LinkedText";
+import { AuthRoutNames } from "../navigation";
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const handleLogin = async (
     values: any,
@@ -68,6 +70,11 @@ const RegisterScreen = () => {
             <View style={{ marginTop: 20 }}>
               <FormSubmitButton title="Register" />
             </View>
+            <LinkedText
+              unlinked="Already have an account? "
+              linkedText="Sign in"
+              onPress={() => navigation.navigate(AuthRoutNames.LOGIN_SCREEN)}
+            />
           </Form>
         </View>
         <View style={{ flex: 1 }} />

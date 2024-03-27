@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AuthNavigation from "../features/auth/navigation/Navigation";
 import { MainRouteName } from "./route";
 
