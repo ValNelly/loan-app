@@ -6,14 +6,13 @@ import Form from "../../../components/form/Form";
 import { LoginSchema } from "../schema";
 import { FormSubmitButton, FormTextInput } from "../../../components/input";
 import LinkedText from "../widgets/LinkedText";
-import { AuthRoutNames } from "../navigation";
 import { login } from "../api";
 import UserContext from "../../../lib/context/user";
+import { AuthRoutNames } from "../navigation/route";
 
 const LoginScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const userContext = useContext(UserContext);
-  console.log(userContext);
   const handleLogin = async (
     values: any,
     { setFieldError }: { setFieldError: any }

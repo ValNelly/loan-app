@@ -3,7 +3,7 @@ import React from "react";
 import Logo from "../../../components/display/Logo";
 import SafeArea from "../../../components/layout/SafeArea";
 import { Button } from "react-native-paper";
-import { AuthRoutNames } from "../navigation";
+import { AuthRoutNames } from "../navigation/route";
 
 interface Props {
   navigation: any;

@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const Navigator = Stack.Navigator;
 const Screen = Stack.Screen;
 
-export const AuthNavigation = () => {
+const AuthNavigation = () => {
   return (
     <Navigator>
       <Screen
@@ -30,3 +30,5 @@ export const AuthNavigation = () => {
     </Navigator>
   );
 };
+
+export default AuthNavigation;

@@ -7,8 +7,10 @@ import { User } from "../../../lib/entities";
 import { viewProfile } from "../../auth/api";
 import LoanCard from "../../../components/display/LoanCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MainRouteName } from "../../../navigation/route";
+import { LoanRoutNames } from "../../loan/navigation/route";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: any) => {
   const userContext = useContext(UserContext);
   const [user, setUser] = useState<User>();
   useEffect(() => {
@@ -51,6 +53,11 @@ const HomeScreen = () => {
           image={require("./../../../../assets/chicken.png")}
         />
         <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
+              screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
+            })
+          }
           style={{
             flexDirection: "row",
             borderTopLeftRadius: 20,

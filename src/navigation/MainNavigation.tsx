@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { AuthNavigation } from "../features/auth/navigation";
 import { MainRouteName } from "./route";
-import { BottomTabNavigation } from "../features/common/navigation";
 import { useContext } from "react";
 import UserContext from "../lib/context/user";
+import { BottomTabNavigation } from "../features/common/navigation/Navigation";
+import LoanNavigation from "../features/loan/navigation/Navigation";
+import AuthNavigation from "../features/auth/navigation/Navigation";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,11 +31,11 @@ const MainNavigation = () => {
           options={{ headerShown: false }}
         />
       )}
-      {/* <Screen
-        name={routes.REGISTER_SCREEN}
-        component={RegisterScreen}
-        options={{ headerTitle: "Register" }}
-      /> */}
+      <Screen
+        name={MainRouteName.LOANS_NAVIGATION}
+        component={LoanNavigation}
+        options={{ headerShown: false }}
+      />
     </Navigator>
   );
 };

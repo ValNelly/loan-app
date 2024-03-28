@@ -12,7 +12,7 @@ import useSecureStore from "./src/lib/hooks/useSecureStore";
 }
 
 export default function App() {
-  const [token, setToken, clearToken] = useSecureStore<string | null>(
+  const [token, setToken, clearToken] = useSecureStore(
     "token",
     null
   );
