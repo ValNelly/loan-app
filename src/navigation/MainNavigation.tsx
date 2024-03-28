@@ -1,7 +1,9 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AuthNavigation from "../features/auth/navigation/Navigation";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AuthNavigation } from "../features/auth/navigation";
 import { MainRouteName } from "./route";
-
+import { BottomTabNavigation } from "../features/common/navigation";
+import { useContext } from "react";
+import UserContext from "../lib/context/user";
 
 const Stack = createNativeStackNavigator();
 
@@ -9,15 +11,16 @@ const Navigator = Stack.Navigator;
 const Screen = Stack.Screen;
 
 const MainNavigation = () => {
-//   const { token } = useUserContext();
-//   const isLoggedIn = Boolean(token);
-  const isLoggedIn = false;
+  const userContext = useContext(UserContext);
+
+  const isLoggedIn = Boolean(userContext?.token);
+  // const isLoggedIn = true;
   return (
     <Navigator>
       {isLoggedIn ? (
         <Screen
-          name={MainRouteName.COMMON_NAVIGATION}
-          component={MainNavigation}
+          name={MainRouteName.BOTTOM_TAB_NAVIGATION}
+          component={BottomTabNavigation}
           options={{ headerShown: false }}
         />
       ) : (
@@ -32,7 +35,6 @@ const MainNavigation = () => {
         component={RegisterScreen}
         options={{ headerTitle: "Register" }}
       /> */}
-      
     </Navigator>
   );
 };

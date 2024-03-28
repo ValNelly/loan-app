@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SafeArea from "../../../components/layout/SafeArea";
 import Logo from "../../../components/display/Logo";
 import Form from "../../../components/form/Form";
@@ -7,31 +7,32 @@ import { LoginSchema } from "../schema";
 import { FormSubmitButton, FormTextInput } from "../../../components/input";
 import LinkedText from "../widgets/LinkedText";
 import { AuthRoutNames } from "../navigation";
+import { login } from "../api";
+import UserContext from "../../../lib/context/user";
 
 const LoginScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
+  const userContext = useContext(UserContext);
+  console.log(userContext);
   const handleLogin = async (
     values: any,
     { setFieldError }: { setFieldError: any }
   ) => {
     setLoading(true);
-    // const response = await register(values);
+    const response = await login(values);
+
     setLoading(false);
-    // if (!response.ok) {
-    //   if (response.problem === "CLIENT_ERROR") {
-    //     for (const key in response.data) {
-    //       const element = response.data[key];
-    //       if (element instanceof Array) {
-    //         setFieldError(key, element.join(";"));
-    //       } else if (element instanceof Object) {
-    //         for (const key1 in element) {
-    //           const element1 = element[key1];
-    //           setFieldError(key1, element1.join(";"));
-    //         }
-    //       }
-    //     }
-    //     return console.log("LoginScreen: ", response.problem, response.data);
-    //   }
+    if (!response.ok) {
+      if (response.problem === "CLIENT_ERROR") {
+        for (const key in response.data as any) {
+          const element = (response.data as any)[key];
+          setFieldError(key, element);
+        }
+        return console.log("LoginScreen: ", response.problem, response.data);
+      }
+    } else {
+      userContext?.setToken?.((response.data as any).token);
+    }
   };
   return (
     <SafeArea>
@@ -56,7 +57,7 @@ const LoginScreen = ({ navigation }: any) => {
               password
             />
             <View style={{ marginTop: 20 }}>
-              <FormSubmitButton title="Login" />
+              <FormSubmitButton title="Login" loading={loading} />
             </View>
             <LinkedText
               unlinked="Dont have an account? "

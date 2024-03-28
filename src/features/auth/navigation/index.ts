@@ -1,2 +1,2 @@
-export * from "./route"
-export * from "./Navigation"
+export { AuthRoutNames } from "./route";
+export { AuthNavigation } from "./Navigation";

@@ -1,2 +1,2 @@
-export * from "./route"
-export * from "./Navigation"
+export { CommonRoutNames } from "./route";
+export { BottomTabNavigation } from "./Navigation";

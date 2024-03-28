@@ -4,13 +4,12 @@ import WelcomeScreen from "../screen/WelcomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthRoutNames } from "./route";
 
-
 const Stack = createNativeStackNavigator();
 
 const Navigator = Stack.Navigator;
 const Screen = Stack.Screen;
 
-const AuthNavigation = () => {
+export const AuthNavigation = () => {
   return (
     <Navigator>
       <Screen
@@ -31,5 +30,3 @@ const AuthNavigation = () => {
     </Navigator>
   );
 };
-
-export default AuthNavigation;

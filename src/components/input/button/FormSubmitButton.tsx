@@ -2,8 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useFormikContext } from "formik";
 import { Button } from "react-native-paper";
-const FormSubmitButton = ({ title }: { title: string }) => {
+const FormSubmitButton = ({ title, loading }: { title: string, loading?:boolean }) => {
   const { handleSubmit, errors } = useFormikContext();
+  console.log(errors);
+  
 
   return (
     <Button
@@ -11,6 +13,7 @@ const FormSubmitButton = ({ title }: { title: string }) => {
         handleSubmit();
       }}
       mode="contained"
+      disabled={loading}
     >
       {title}
     </Button>
