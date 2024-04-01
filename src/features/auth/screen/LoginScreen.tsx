@@ -13,24 +13,19 @@ import { AuthRoutNames } from "../navigation/route";
 const LoginScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const userContext = useContext(UserContext);
-  const handleLogin = async (
-    values: any,
-    { setFieldError }: { setFieldError: any }
-  ) => {
+  const handleLogin = async (values: any, { setErrors, errors }: any) => {
     setLoading(true);
     const response = await login(values);
-
     setLoading(false);
-    if (!response.ok) {
-      if (response.problem === "CLIENT_ERROR") {
-        for (const key in response.data as any) {
-          const element = (response.data as any)[key];
-          setFieldError(key, element);
-        }
-        return console.log("LoginScreen: ", response.problem, response.data);
-      }
+    if (response.ok) {
+      const token = (response.data as any).token;
+      userContext?.setToken(token);
     } else {
-      userContext?.setToken?.((response.data as any).token);
+      if (response.status === 400) {
+        setErrors({ ...errors, ...(response.data as any).errors });
+      } else {
+        console.log(response.data);
+      }
     }
   };
   return (

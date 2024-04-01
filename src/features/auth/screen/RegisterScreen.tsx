@@ -14,23 +14,19 @@ const RegisterScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const userContext = useContext(UserContext);
 
-  const handleLogin = async (
-    values: any,
-    { setFieldError }: { setFieldError: any }
-  ) => {
+  const handleLogin = async (values: any, { setErrors, errors }: any) => {
     setLoading(true);
     const response = await register(values);
     setLoading(false);
-    if (!response.ok) {
-      if (response.problem === "CLIENT_ERROR") {
-        for (const key in response.data as any) {
-          const element = (response.data as any)[key];
-          setFieldError(key, element);
-        }
-        return console.log("Registter: ", response.problem, response.data);
-      }
+    if (response.ok) {
+      const token = (response.data as any).token;
+      userContext?.setToken(token);
     } else {
-      userContext?.setToken?.((response.data as any).token);
+      if (response.status === 400) {
+        setErrors({ ...errors, ...(response.data as any).errors });
+      } else {
+        console.log(response.data);
+      }
     }
   };
   return (
@@ -54,6 +50,11 @@ const RegisterScreen = ({ navigation }: any) => {
               label="Username"
               prefixIcon="account"
             />
+            <FormTextInput
+              name="phoneNumber"
+              label="Phone number"
+              prefixIcon="phone"
+            />
             <FormTextInput name="email" label="Email" prefixIcon="email" />
             <FormTextInput
               name="password"
@@ -62,13 +63,13 @@ const RegisterScreen = ({ navigation }: any) => {
               password
             />
             <FormTextInput
-              name="confirm_password"
+              name="confirmPassword"
               label="Confirm Password"
               prefixIcon="lock"
               password
             />
             <View style={{ marginTop: 20 }}>
-              <FormSubmitButton title="Register" />
+              <FormSubmitButton title="Register" loading={loading} />
             </View>
             <LinkedText
               unlinked="Already have an account? "

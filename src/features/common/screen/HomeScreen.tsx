@@ -17,6 +17,7 @@ const HomeScreen = ({ navigation }: any) => {
     (async () => {
       const response = await viewProfile(userContext!.token);
       if (response.ok) setUser(response.data as User);
+      else console.log("->Homescreen", response.data);
     })();
   });
   return (
