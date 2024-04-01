@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { getMyLoans } from "../../loan/api";
 import UserContext from "../../../lib/context/user";
 import { LoanRequest } from "../../../lib/entities";
@@ -8,16 +8,19 @@ import { SafeArea } from "../../../components/layout";
 import moment from "moment/moment";
 import { MainRouteName } from "../../../navigation/route";
 import { LoanRoutNames } from "../../loan/navigation/route";
+import { useFocusEffect } from "@react-navigation/native";
 
 const MyLoansScreen = ({ navigation }: any) => {
   const userContext = useContext(UserContext);
   const [myLoans, setMyLoans] = useState<LoanRequest[]>([]);
-  useEffect(() => {
-    (async () => {
-      const response = await getMyLoans(userContext!.token);
-      if (response.ok) setMyLoans((response.data as any).results);
-    })();
+  const handleFetch = useCallback(async () => {
+    const response = await getMyLoans(userContext!.token);
+    if (response.ok) setMyLoans((response.data as any).results);
   }, []);
+  useFocusEffect(() => {
+    handleFetch();
+  });
+
   return (
     <SafeArea>
       <FlatList
@@ -25,11 +28,12 @@ const MyLoansScreen = ({ navigation }: any) => {
         keyExtractor={({ id }) => id}
         renderItem={({ item: { amount, createdAat, status, loan, type } }) => (
           <List.Item
+            style={{ backgroundColor: "white", marginBottom: 10 }}
             title={`Ksh. ${amount} ${type} Loan`}
             description={`Status: ${status} | ${moment(createdAat).format(
               "Do dd MM yyy"
             )}`}
-            left={(props) => <List.Icon {...props} icon={"money"} />}
+            left={(props) => <List.Icon {...props} icon={"bank"} />}
             right={(props) => <List.Icon {...props} icon={"chevron-right"} />}
           />
         )}

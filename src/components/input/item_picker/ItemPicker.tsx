@@ -1,10 +1,9 @@
 import {
   StyleSheet,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Modal,
   FlatList,
-  TouchableOpacity,
   ViewStyle,
   StyleProp,
 } from "react-native";
@@ -75,15 +74,19 @@ const ItemPicker: React.FunctionComponent<ItemPickerProps> = ({
 
   return (
     <>
-      <TouchableHighlight onPress={toggleShowItems}>
+      <TouchableOpacity onPress={toggleShowItems}>
         <TextInput
           error={Boolean(error)}
           label={label}
           mode={variant}
           value={
             labelExtractor
-              ? (currentItem ? labelExtractor(currentItem) : "")
-              : (currentItem ? JSON.stringify(currentItem) : "")
+              ? currentItem
+                ? labelExtractor(currentItem)
+                : ""
+              : currentItem
+              ? JSON.stringify(currentItem)
+              : ""
           }
           editable={false}
           left={
@@ -107,31 +110,40 @@ const ItemPicker: React.FunctionComponent<ItemPickerProps> = ({
             )
           }
         />
-      </TouchableHighlight>
+      </TouchableOpacity>
       {showItems && (
         <Modal animationType="slide" onRequestClose={toggleShowItems}>
           <View style={styles.itemsContainer}>
-            {label && <Text variant="titleLarge" style={{ textAlign: "center", marginVertical: 20 }}>{label}</Text>}
-            {searchable && <TextInput
-              {...{
-                left: <TextInput.Icon icon="magnify" />,
-                ...searchStyle,
-                onChangeText: (value: string) =>
-                  // Chipo  -> ipo
-                  setFiltered(
-                    data.filter((_dat) =>
-                      (labelExtractor
-                        ? labelExtractor(_dat)
-                        : JSON.stringify(_dat)
+            {label && (
+              <Text
+                variant="titleLarge"
+                style={{ textAlign: "center", marginVertical: 20 }}
+              >
+                {label}
+              </Text>
+            )}
+            {searchable && (
+              <TextInput
+                {...{
+                  left: <TextInput.Icon icon="magnify" />,
+                  ...searchStyle,
+                  onChangeText: (value: string) =>
+                    // Chipo  -> ipo
+                    setFiltered(
+                      data.filter((_dat) =>
+                        (labelExtractor
+                          ? labelExtractor(_dat)
+                          : JSON.stringify(_dat)
+                        )
+                          .toLowerCase()
+                          .includes(value.toLowerCase())
                       )
-                        .toLowerCase()
-                        .includes(value.toLowerCase())
-                    )
-                  ),
+                    ),
 
-                value: undefined,
-              }}
-            />}
+                  value: undefined,
+                }}
+              />
+            )}
 
             <FlatList
               contentContainerStyle={contentContainerStyle}
