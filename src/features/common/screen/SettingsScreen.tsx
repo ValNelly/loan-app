@@ -14,7 +14,7 @@ const SettingsScreen = () => {
       const response = await viewProfile(userContext!.token);
       if (response.ok) setUser(response.data as User);
     })();
-  });
+  }, []);
   return (
     <SafeArea>
       {user && (

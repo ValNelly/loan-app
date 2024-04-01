@@ -3,6 +3,7 @@ import HomeScreen from "../screen/HomeScreen";
 import { CommonRoutNames } from "./route";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SettingsScreen from "../screen/SettingsScreen";
+import MyLoansScreen from "../screen/MyLoansScreen";
 
 const Stack = createBottomTabNavigator();
 
@@ -20,6 +21,17 @@ export const BottomTabNavigation = () => {
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Screen
+        component={MyLoansScreen}
+        name={CommonRoutNames.MY_LOANS_SCREEN}
+        options={{
+          title: "My Loans",
+          tabBarLabel: "MyLoans",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bank" color={color} size={size} />
           ),
         }}
       />

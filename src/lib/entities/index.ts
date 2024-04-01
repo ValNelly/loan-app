@@ -30,4 +30,13 @@ export interface FeedLoan extends Entity {
   quantity: string;
 }
 
-export interface LoanRequest extends Entity {}
+export interface LoanRequest extends Entity {
+  userId: string;
+  user: User;
+  loandId: string;
+  loan: Loan;
+  type: "Money" | "Feed";
+  amount: Number;
+  status: "Pending" | "Aproved" | "Rejected";
+  feedsLoan: FeedLoan[];
+}

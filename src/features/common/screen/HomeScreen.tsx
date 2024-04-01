@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }: any) => {
       if (response.ok) setUser(response.data as User);
       else console.log("->Homescreen", response.data);
     })();
-  });
+  }, []);
   return (
     <SafeArea>
       <View style={{ flex: 1 }}>
