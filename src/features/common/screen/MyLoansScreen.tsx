@@ -26,17 +26,26 @@ const MyLoansScreen = ({ navigation }: any) => {
       <FlatList
         data={myLoans}
         keyExtractor={({ id }) => id}
-        renderItem={({ item: { amount, createdAat, status, loan, type } }) => (
-          <List.Item
-            style={{ backgroundColor: "white", marginBottom: 10 }}
-            title={`Ksh. ${amount} ${type} Loan`}
-            description={`Status: ${status} | ${moment(createdAat).format(
-              "Do dd MM yyy"
-            )}`}
-            left={(props) => <List.Icon {...props} icon={"bank"} />}
-            right={(props) => <List.Icon {...props} icon={"chevron-right"} />}
-          />
-        )}
+        renderItem={({ item }) => {
+          const { amount, createdAat, status, loan, type } = item;
+          return (
+            <List.Item
+              style={{ backgroundColor: "white", marginBottom: 10 }}
+              title={`Ksh. ${amount} ${type} Loan`}
+              description={`Status: ${status} | ${moment(createdAat).format(
+                "Do dd MM yyy"
+              )}`}
+              left={(props) => <List.Icon {...props} icon={"bank"} />}
+              right={(props) => <List.Icon {...props} icon={"chevron-right"} />}
+              onPress={() =>
+                navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
+                  screen: LoanRoutNames.LOAN_DETAIL_SCREEN,
+                  params: item,
+                })
+              }
+            />
+          );
+        }}
       />
       <FAB
         label="Request Loan"
