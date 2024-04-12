@@ -3,8 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import SafeArea from "../../../components/layout/SafeArea";
 import { IconButton, Searchbar, Text } from "react-native-paper";
 import UserContext from "../../../lib/context/user";
-import { User } from "../../../lib/entities";
-import { viewProfile } from "../../auth/api";
 import LoanCard from "../../../components/display/LoanCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MainRouteName } from "../../../navigation/route";
@@ -12,14 +10,6 @@ import { LoanRoutNames } from "../../loan/navigation/route";
 
 const HomeScreen = ({ navigation }: any) => {
   const userContext = useContext(UserContext);
-  const [user, setUser] = useState<User>();
-  useEffect(() => {
-    (async () => {
-      const response = await viewProfile(userContext!.token);
-      if (response.ok) setUser(response.data as User);
-      else console.log("->Homescreen", response.data);
-    })();
-  }, []);
   return (
     <SafeArea>
       <View style={{ flex: 1 }}>
@@ -33,7 +23,7 @@ const HomeScreen = ({ navigation }: any) => {
         >
           <IconButton icon={"menu"} />
           <Text variant="headlineSmall" style={{ flex: 1 }}>
-            Welcome {user?.username} 👋
+            Welcome {userContext?.user?.username} 👋
           </Text>
           <View style={{ flexDirection: "row" }}>
             <IconButton icon={"bell"} />

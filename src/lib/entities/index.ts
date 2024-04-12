@@ -10,6 +10,7 @@ export interface User extends Entity {
   email: string;
   phoneNumber: string;
   gender?: string;
+  isStaff: boolean;
 }
 
 export interface Loan extends Entity {

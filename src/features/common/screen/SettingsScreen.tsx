@@ -3,25 +3,17 @@ import React, { useContext, useEffect, useState } from "react";
 import SafeArea from "../../../components/layout/SafeArea";
 import { Avatar, Card, List } from "react-native-paper";
 import UserContext from "../../../lib/context/user";
-import { User } from "../../../lib/entities";
-import { viewProfile } from "../../auth/api";
 
 const SettingsScreen = () => {
   const userContext = useContext(UserContext);
-  const [user, setUser] = useState<User>();
-  useEffect(() => {
-    (async () => {
-      const response = await viewProfile(userContext!.token);
-      if (response.ok) setUser(response.data as User);
-    })();
-  }, []);
+ 
   return (
     <SafeArea>
-      {user && (
+      {userContext?.user && (
         <Card.Title
           style={{ backgroundColor: "white" }}
-          title={user.name ?? user.username}
-          subtitle={user.email}
+          title={userContext.user.name ?? userContext.user.username}
+          subtitle={userContext.user.email}
           left={(props) => <Avatar.Icon {...props} icon={"account"} />}
         />
       )}

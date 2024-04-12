@@ -4,8 +4,6 @@ import { useFormikContext } from "formik";
 import { Button } from "react-native-paper";
 const FormSubmitButton = ({ title, loading }: { title: string, loading?:boolean }) => {
   const { handleSubmit, errors } = useFormikContext();
-  console.log(errors);
-  
 
   return (
     <Button
