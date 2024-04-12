@@ -8,4 +8,5 @@ export const requestLoan = (token: string, data: any) =>
   });
 
 export const getLoans = () => httpClient.get("loans/");
+export const getLoanRequests = () => httpClient.get("loan-requests/");
 export const getFeeds = () => httpClient.get("feeds/");
