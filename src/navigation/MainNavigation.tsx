@@ -5,6 +5,7 @@ import UserContext from "../lib/context/user";
 import { BottomTabNavigation } from "../features/common/navigation/Navigation";
 import LoanNavigation from "../features/loan/navigation/Navigation";
 import AuthNavigation from "../features/auth/navigation/Navigation";
+import AdminNavigation from "../features/admin/navigation/Navigation";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,11 @@ const MainNavigation = () => {
       <Screen
         name={MainRouteName.LOANS_NAVIGATION}
         component={LoanNavigation}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name={MainRouteName.ADMIN_NAVIGATION}
+        component={AdminNavigation}
         options={{ headerShown: false }}
       />
     </Navigator>
