@@ -1,4 +1,5 @@
-export { default as AddLoanFormScreen } from "./AddLoanFormScreen";
+export { default as LoanFormScreen } from "./LoanFormScreen";
+export { default as FeedsFormScreen } from "./FeedsFormScreen";
 export { default as AdminMenuScreen } from "./AdminMenuScreen";
 export { default as FeedsScreen } from "./FeedsScreen";
 export { default as LoanRequestScreens } from "./LoanRequestScreens";

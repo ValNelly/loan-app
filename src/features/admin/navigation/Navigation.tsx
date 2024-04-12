@@ -1,11 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AdminRoutNames } from "./route";
 import {
-  AddLoanFormScreen,
+  LoanFormScreen,
   FeedsScreen,
   LoanRequestScreens,
   LoansScreen,
   UsersScreen,
+  FeedsFormScreen,
 } from "../screen";
 
 const Stack = createNativeStackNavigator();
@@ -17,9 +18,18 @@ const AdminNavigation = () => {
   return (
     <Navigator>
       <Screen
-        name={AdminRoutNames.ADD_LOAN_FORM_SCREEN}
-        component={AddLoanFormScreen}
-        options={{ headerTitle: "Add loan" }}
+        name={AdminRoutNames.LOAN_FORM_SCREEN}
+        component={LoanFormScreen}
+        options={({ route }) => ({
+          headerTitle: route.params ? "Update Loan" : "Add Loan",
+        })}
+      />
+      <Screen
+        name={AdminRoutNames.FEEDS_FORM_SCREEN}
+        component={FeedsFormScreen}
+        options={({ route }) => ({
+          headerTitle: route.params ? "Update Feed" : "Add Feed",
+        })}
       />
       <Screen
         name={AdminRoutNames.LOANS_SCREEN}

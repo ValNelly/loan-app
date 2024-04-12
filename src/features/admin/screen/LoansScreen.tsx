@@ -5,7 +5,9 @@ import { Loan } from "../../../lib/entities";
 import { getLoans } from "../../loan/api";
 import moment from "moment/moment";
 import { useFocusEffect } from "@react-navigation/native";
-const LoansScreen = () => {
+import { MainRouteName } from "../../../navigation/route";
+import { AdminRoutNames } from "../navigation/route";
+const LoansScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const [loans, setLoans] = useState<Loan[]>([]);
 
@@ -33,9 +35,11 @@ const LoansScreen = () => {
           return (
             <TouchableOpacity
               onPress={() => {
-                // navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
-                //   screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
-                // })
+                navigation.navigate(MainRouteName.ADMIN_NAVIGATION, {
+                  screen: AdminRoutNames.LOAN_FORM_SCREEN,
+                  params: item
+
+                });
               }}
             >
               <Card.Title
@@ -59,13 +63,13 @@ const LoansScreen = () => {
         }}
       />
       <FAB
-        label="Add Feed"
+        label="Add Loan"
         icon="plus"
         style={styles.fab}
         onPress={() => {
-          // navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
-          //   screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
-          // })
+          navigation.navigate(MainRouteName.ADMIN_NAVIGATION, {
+            screen: AdminRoutNames.LOAN_FORM_SCREEN,
+          });
         }}
       />
     </View>
