@@ -8,6 +8,7 @@ import {
   UsersScreen,
   FeedsFormScreen,
   LoanRequestDetail,
+  UserFormScreen,
 } from "../screen";
 import { LoanRequest } from "../../../lib/entities";
 
@@ -59,6 +60,11 @@ const AdminNavigation = () => {
         name={AdminRoutNames.USERS_SCREEN}
         component={UsersScreen}
         options={{ headerTitle: "Users" }}
+      />
+      <Screen
+        name={AdminRoutNames.USERS_FORM_SCREEN}
+        component={UserFormScreen}
+        options={{ headerTitle: "Users update" }}
       />
       <Screen
         name={AdminRoutNames.FEEDS_SCREEN}

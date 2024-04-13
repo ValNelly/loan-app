@@ -43,30 +43,32 @@ const HomeScreen = ({ navigation }: any) => {
           type="Feeds loan"
           image={require("./../../../../assets/chicken.png")}
         />
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
-              screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
-            })
-          }
-          style={{
-            flexDirection: "row",
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 20,
-            backgroundColor: "indigo",
-            position: "absolute",
-            padding: 20,
-            justifyContent: "center",
-            alignItems: "center",
-            bottom: 10,
-            right: 0,
-          }}
-        >
-          <MaterialCommunityIcons name="plus" size={24} color="white" />
-          <Text variant="headlineMedium" style={{ color: "white" }}>
-            Apply now
-          </Text>
-        </TouchableOpacity>
+        {userContext?.user?.isStaff !== true && (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
+                screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
+              })
+            }
+            style={{
+              flexDirection: "row",
+              borderTopLeftRadius: 20,
+              borderBottomLeftRadius: 20,
+              backgroundColor: "indigo",
+              position: "absolute",
+              padding: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              bottom: 10,
+              right: 0,
+            }}
+          >
+            <MaterialCommunityIcons name="plus" size={24} color="white" />
+            <Text variant="headlineMedium" style={{ color: "white" }}>
+              Apply now
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeArea>
   );

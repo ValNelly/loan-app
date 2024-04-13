@@ -5,8 +5,10 @@ import { User } from "../../../lib/entities";
 import moment from "moment/moment";
 import { useFocusEffect } from "@react-navigation/native";
 import { getUser } from "../../auth/api";
+import { MainRouteName } from "../../../navigation/route";
+import { AdminRoutNames } from "../navigation/route";
 
-const UsersScreen = () => {
+const UsersScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
 
@@ -35,9 +37,10 @@ const UsersScreen = () => {
           return (
             <TouchableOpacity
               onPress={() => {
-                // navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
-                //   screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
-                // })
+                navigation.navigate(MainRouteName.ADMIN_NAVIGATION, {
+                  screen: AdminRoutNames.USERS_FORM_SCREEN,
+                  params: item,
+                });
               }}
             >
               <Card.Title
@@ -58,7 +61,7 @@ const UsersScreen = () => {
           );
         }}
       />
-      <FAB
+      {/* <FAB
         label="Add Feed"
         icon="plus"
         style={styles.fab}
@@ -67,7 +70,7 @@ const UsersScreen = () => {
           //   screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
           // })
         }}
-      />
+      /> */}
     </View>
   );
 };

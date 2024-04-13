@@ -36,6 +36,7 @@ const LoanRequestScreens = ({ navigation }: any) => {
           const {
             amount,
             feedsLoan,
+            status,
             loan,
             user: { name },
             createdAat,
@@ -58,10 +59,12 @@ const LoanRequestScreens = ({ navigation }: any) => {
                   />
                 )}
                 style={{ marginBottom: 5, backgroundColor: "white" }}
-                subtitle={moment(createdAat).format("Do ddd MMM yyy")}
+                subtitle={`${status} | ${moment(createdAat).format(
+                  "Do ddd MMM yyy"
+                )}`}
                 right={(props) => (
                   <View>
-                    <Text>{`Ksh. ${amount} per Kg`}</Text>
+                    <Text>{`Ksh. ${amount}    `}</Text>
                   </View>
                 )}
               />
