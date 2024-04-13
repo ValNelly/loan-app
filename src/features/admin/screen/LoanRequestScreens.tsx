@@ -5,8 +5,10 @@ import { LoanRequest } from "../../../lib/entities";
 import { getFeeds, getLoanRequests } from "../../loan/api";
 import moment from "moment/moment";
 import { useFocusEffect } from "@react-navigation/native";
+import { MainRouteName } from "../../../navigation/route";
+import { AdminRoutNames } from "../navigation/route";
 
-const LoanRequestScreens = () => {
+const LoanRequestScreens = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const [loanRequests, setLoanRequests] = useState<LoanRequest[]>([]);
 
@@ -41,9 +43,10 @@ const LoanRequestScreens = () => {
           return (
             <TouchableOpacity
               onPress={() => {
-                // navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
-                //   screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
-                // })
+                navigation.navigate(MainRouteName.ADMIN_NAVIGATION, {
+                  screen: AdminRoutNames.LOAN_REQUEST_DETAIL_SCREEN,
+                  params: item,
+                });
               }}
             >
               <Card.Title

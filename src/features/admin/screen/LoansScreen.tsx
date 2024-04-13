@@ -7,6 +7,7 @@ import moment from "moment/moment";
 import { useFocusEffect } from "@react-navigation/native";
 import { MainRouteName } from "../../../navigation/route";
 import { AdminRoutNames } from "../navigation/route";
+
 const LoansScreen = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const [loans, setLoans] = useState<Loan[]>([]);
@@ -37,8 +38,7 @@ const LoansScreen = ({ navigation }: any) => {
               onPress={() => {
                 navigation.navigate(MainRouteName.ADMIN_NAVIGATION, {
                   screen: AdminRoutNames.LOAN_FORM_SCREEN,
-                  params: item
-
+                  params: item,
                 });
               }}
             >

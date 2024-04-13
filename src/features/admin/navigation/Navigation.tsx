@@ -7,7 +7,9 @@ import {
   LoansScreen,
   UsersScreen,
   FeedsFormScreen,
+  LoanRequestDetail,
 } from "../screen";
+import { LoanRequest } from "../../../lib/entities";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,18 @@ const AdminNavigation = () => {
         options={({ route }) => ({
           headerTitle: route.params ? "Update Loan" : "Add Loan",
         })}
+      />
+      <Screen
+        name={AdminRoutNames.LOAN_REQUEST_DETAIL_SCREEN}
+        component={LoanRequestDetail}
+        options={({ route }) => {
+          const request = route.params as LoanRequest;
+          return {
+            headerTitle: `${request.user.name ?? request.user.username}'s Ksh.${
+              request.amount
+            } Loan`,
+          };
+        }}
       />
       <Screen
         name={AdminRoutNames.FEEDS_FORM_SCREEN}

@@ -9,6 +9,10 @@ export const requestLoan = (token: string, data: any) =>
 
 export const getLoans = () => httpClient.get("loans/");
 export const getLoanRequests = () => httpClient.get("loan-requests/");
+export const updateLoanRequestStatus = (
+  id: string,
+  action: "reject" | "aprove"
+) => httpClient.put(`loan-requests/${id}/${action}`);
 export const getFeeds = () => httpClient.get("feeds/");
 export const addFeed = (data: any) => httpClient.post("feeds/", data);
 export const updateFeed = (id: string, data: any) =>
