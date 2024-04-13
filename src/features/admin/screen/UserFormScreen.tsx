@@ -15,7 +15,11 @@ import { addUser, updateUser } from "../../auth/api";
 import FormCheckbox from "../../../components/input/check_box/FormCheckbox";
 
 const UserFormScreen = ({ navigation, route }: any) => {
-  const user: User | undefined = route.params;
+  // const user: User | undefined = route.params;
+  const { user, profile } = route.params as {
+    user: User | undefined;
+    profile: boolean;
+  };
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (values: any, { setErrors, errors }: any) => {
@@ -89,7 +93,7 @@ const UserFormScreen = ({ navigation, route }: any) => {
                 { label: "Female", value: "FEMALE" },
               ]}
             />
-            <FormCheckbox label="Is staff" name="isStaff" />
+            {!profile && <FormCheckbox label="Is staff" name="isStaff" />}
             <View style={{ marginTop: 20 }}>
               <FormSubmitButton
                 title={user ? "Update User" : "Add Loan"}

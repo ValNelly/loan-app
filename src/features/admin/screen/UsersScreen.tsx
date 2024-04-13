@@ -39,7 +39,7 @@ const UsersScreen = ({ navigation }: any) => {
               onPress={() => {
                 navigation.navigate(MainRouteName.ADMIN_NAVIGATION, {
                   screen: AdminRoutNames.USERS_FORM_SCREEN,
-                  params: item,
+                  params: { user: item, profile: false },
                 });
               }}
             >
