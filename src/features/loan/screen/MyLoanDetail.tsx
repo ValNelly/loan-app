@@ -71,8 +71,9 @@ const MyLoanDetail = ({ route }: any) => {
           description="Status"
           left={(props) => <List.Icon {...props} icon={"progress-check"} />}
         />
-        {feedsLoan.map(({ feed, quantity }) => (
+        {feedsLoan.map(({ feed, quantity }, index) => (
           <List.Item
+            key={index}
             style={{ backgroundColor: "white", marginBottom: 10 }}
             title={`${feed.name} | ${quantity} Kgs @ Ksh.${feed.unitPrice}`}
             description="Feed"

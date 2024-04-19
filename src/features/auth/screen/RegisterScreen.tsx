@@ -41,7 +41,8 @@ const RegisterScreen = ({ navigation }: any) => {
               username: "",
               password: "",
               email: "",
-              confirm_password: "",
+              confirmPassword: "",
+              phoneNumber: "",
             }}
             onSubmit={handleLogin}
           >

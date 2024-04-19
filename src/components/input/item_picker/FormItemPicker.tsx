@@ -42,9 +42,6 @@ const FormItemPicker: React.FC<FormItemPickerProps> = ({ ...props }) => {
   const _values: any = values;
   const _error: any = errors;
 
-  console.log(errors);
-  
-
   return (
     <ItemPicker
       {...{

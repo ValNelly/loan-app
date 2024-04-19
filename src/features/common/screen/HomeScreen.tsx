@@ -3,8 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import SafeArea from "../../../components/layout/SafeArea";
 import { IconButton, Searchbar, Text } from "react-native-paper";
 import UserContext from "../../../lib/context/user";
-import { User } from "../../../lib/entities";
-import { viewProfile } from "../../auth/api";
 import LoanCard from "../../../components/display/LoanCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MainRouteName } from "../../../navigation/route";
@@ -12,14 +10,6 @@ import { LoanRoutNames } from "../../loan/navigation/route";
 
 const HomeScreen = ({ navigation }: any) => {
   const userContext = useContext(UserContext);
-  const [user, setUser] = useState<User>();
-  useEffect(() => {
-    (async () => {
-      const response = await viewProfile(userContext!.token);
-      if (response.ok) setUser(response.data as User);
-      else console.log("->Homescreen", response.data);
-    })();
-  }, []);
   return (
     <SafeArea>
       <View style={{ flex: 1 }}>
@@ -33,7 +23,7 @@ const HomeScreen = ({ navigation }: any) => {
         >
           <IconButton icon={"menu"} />
           <Text variant="headlineSmall" style={{ flex: 1 }}>
-            Welcome {user?.username} 👋
+            Welcome {userContext?.user?.username} 👋
           </Text>
           <View style={{ flexDirection: "row" }}>
             <IconButton icon={"bell"} />
@@ -53,30 +43,32 @@ const HomeScreen = ({ navigation }: any) => {
           type="Feeds loan"
           image={require("./../../../../assets/chicken.png")}
         />
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
-              screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
-            })
-          }
-          style={{
-            flexDirection: "row",
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 20,
-            backgroundColor: "indigo",
-            position: "absolute",
-            padding: 20,
-            justifyContent: "center",
-            alignItems: "center",
-            bottom: 10,
-            right: 0,
-          }}
-        >
-          <MaterialCommunityIcons name="plus" size={24} color="white" />
-          <Text variant="headlineMedium" style={{ color: "white" }}>
-            Apply now
-          </Text>
-        </TouchableOpacity>
+        {userContext?.user?.isStaff !== true && (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(MainRouteName.LOANS_NAVIGATION, {
+                screen: LoanRoutNames.APPLY_LOAN_FORM_SCREEN,
+              })
+            }
+            style={{
+              flexDirection: "row",
+              borderTopLeftRadius: 20,
+              borderBottomLeftRadius: 20,
+              backgroundColor: "indigo",
+              position: "absolute",
+              padding: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              bottom: 10,
+              right: 0,
+            }}
+          >
+            <MaterialCommunityIcons name="plus" size={24} color="white" />
+            <Text variant="headlineMedium" style={{ color: "white" }}>
+              Apply now
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeArea>
   );
